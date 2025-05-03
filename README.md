@@ -1,6 +1,6 @@
 # 📫 Aether Mail CLI client
 
-**AetherMail CLI** is the official command-line interface (CLI) for AetherMail – the open-source email platform by [Sky Genesis Enterprise](https://skygenesisenterprise.com). It allows users to interact with their mailboxes, send emails, manage accounts, and more — all from the terminal.
+**Aether Mail CLI** is the official command-line interface (CLI) for Aether Mail – the open-source email platform by [Sky Genesis Enterprise](https://skygenesisenterprise.com). It allows users to interact with their mailboxes, send emails, manage accounts, and more — all from the terminal.
 
 ---
 
@@ -21,7 +21,7 @@
 #### Linux / macOS
 
 ```bash
-git clone https://github.com/skygenesisenterprise/aethermail-cli.git
+git clone https://github.com/Sky-Genesis-Enterprise/aether-mail-cli.git
 cd aethermail-cli
 chmod +x install.sh
 ./install.sh
@@ -30,7 +30,7 @@ chmod +x install.sh
 #### Windows (PowerShell)
 
 ```powershell
-git clone https://github.com/skygenesisenterprise/aethermail-cli.git
+git clone https://github.com/Sky-Genesis-Enterprise/aether-mail-cli.git
 cd aethermail-cli
 .\install.bat
 ```
@@ -72,25 +72,25 @@ You can refer to `.env.example` for more info.
 * Login to your AetherMail account:
 
   ```bash
-  aethermail-cli login
+  amc login
   ```
 
 * Send an email:
 
   ```bash
-  aethermail-cli send --to user@example.com --subject "Hello" --body "Welcome!"
+  amc send --to user@example.com --subject "Hello" --body "Welcome!"
   ```
 
 * Read your inbox:
 
   ```bash
-  aethermail-cli read
+  amc read
   ```
 
 * Create a new email account (admin only):
 
   ```bash
-  aethermail-cli account create --username john --domain aethermail.fr
+  amc account create --username john --domain aethermail.fr
   ```
 
 ---
@@ -117,18 +117,18 @@ We welcome contributions!
 
 ---
 
-## 📜 License
-
-AetherMail CLI is licensed under the **GNU AGPLv3**. You’re free to use, modify and share under the same license.
-
----
-
 ## 🧠 Final Words
 
-AetherMail CLI reflects our vision: to give developers and power users a secure, transparent, and powerful way to manage email from the terminal — while staying fully open-source.
+Aether Mail CLI reflects our vision: to give developers and power users a secure, transparent, and powerful way to manage email from the terminal — while staying fully open-source.
 
 Whether you’re self-hosting AetherMail or using our cloud infrastructure, this tool is built for **speed, reliability, and simplicity**.
 
 Stay in touch and join the journey!
 
 — The Sky Genesis Enterprise Team
+
+## 📜 License
+
+AetherMail CLI is licensed under the **GNU AGPLv3**. You’re free to use, modify and share under the same license.
+
+---
