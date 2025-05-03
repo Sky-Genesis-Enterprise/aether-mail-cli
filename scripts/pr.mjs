@@ -3,6 +3,10 @@ import inquirer from 'inquirer';
 import { execSync } from 'child_process';
 
 const main = async () => {
+  console.log("===========================");
+  console.log("Pull Request System by SGE");
+  console.log("===========================\n");
+
   const answers = await inquirer.prompt([
     {
       type: 'input',
