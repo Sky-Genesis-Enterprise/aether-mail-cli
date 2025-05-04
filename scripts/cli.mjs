@@ -9,7 +9,7 @@ import { fileURLToPath } from 'url';
 
 console.clear();
 
-// Récupération de la version depuis package.json
+// Lire la version depuis package.json
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const pkgPath = path.join(__dirname, '..', 'package.json');
 let version = 'unknown';
@@ -17,9 +17,10 @@ try {
   const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
   version = pkg.version;
 } catch (e) {
-  console.warn(chalk.yellow('⚠️ Impossible de lire package.json pour récupérer la version.'));
+  console.warn(chalk.yellow('⚠️ Impossible de lire package.json pour la version.'));
 }
 
+// Embed de bienvenue
 const welcome = `
 ${chalk.hex('#7f5af0')('╔════════════════════════════════════════════════════════╗')}
 ${chalk.hex('#7f5af0')('║')}        ${chalk.bold.hex('#ffffff')('🚀 Aether Dev Tool')} ${chalk.gray(`v${version}`)}                 ${chalk.hex('#7f5af0')('║')}
@@ -37,7 +38,7 @@ const main = async () => {
       message: 'Que souhaitez-vous faire ?',
       choices: [
         { name: '🚀 Initialiser un nouveau projet', value: 'init' },
-        { name: '🌿 Créer une Pull Request', value: 'pr' },
+        { name: '🌿 Créer une Pull Request (manuellement)', value: 'pr' },
         { name: '📦 Déployer l’application', value: 'deploy' },
         { name: '🧾 Générer un fichier type', value: 'generate' },
         { name: '❌ Quitter', value: 'exit' }
@@ -72,9 +73,9 @@ async function runInit() {
 
 async function runPR() {
   const answers = await inquirer.prompt([
-    { type: 'input', name: 'branch', message: 'Nom de la branche ?' },
-    { type: 'input', name: 'title', message: 'Titre de la PR ?' },
-    { type: 'input', name: 'body', message: 'Description (optionnelle) :' }
+    { type: 'input', name: 'branch', message: 'Nom de la nouvelle branche ?' },
+    { type: 'input', name: 'title', message: 'Titre du commit :' },
+    { type: 'input', name: 'remoteUrl', message: 'URL du dépôt GitHub (ex: https://github.com/user/repo) :' }
   ]);
 
   try {
@@ -82,10 +83,12 @@ async function runPR() {
     await execa('git', ['add', '.']);
     await execa('git', ['commit', '-m', answers.title]);
     await execa('git', ['push', '--set-upstream', 'origin', answers.branch]);
-    await execa('gh', ['pr', 'create', '--title', answers.title, '--body', answers.body]);
-    console.log(chalk.green('\n✅ PR créée avec succès.\n'));
+    console.log(chalk.green('\n✅ Branche poussée avec succès.'));
+
+    const prUrl = `${answers.remoteUrl}/compare/${answers.branch}?expand=1`;
+    console.log(chalk.blue(`\n👉 Tu peux maintenant créer ta PR ici : ${chalk.underline(prUrl)}\n`));
   } catch (error) {
-    console.error(chalk.red('❌ Erreur pendant la création de la PR'), error.message);
+    console.error(chalk.red('❌ Erreur pendant la création de la branche/commit/push'), error.message);
   }
 }
 
